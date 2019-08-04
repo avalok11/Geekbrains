@@ -35,10 +35,16 @@ describe geekbrains.users;
 /*
 РЕШЕНИЕ
 */
-ALTER TABLE users ADD created_at_temp DATETIME, ADD updated_at_temp DATETIME;
-UPDATE users SET 
-    created_at_temp=DATE_FORMAT(str_to_date(created_at, '%d.%m.%Y %H:%i'),'%Y-%m-%d %H:%i'), 
-    updated_at_temp=DATE_FORMAT(str_to_date(updated_at, '%d.%m.%Y %H:%i'),'%Y-%m-%d %H:%i');
-ALTER TABLE users DROP COLUMN created_at, DROP COLUMN updated_at;
+UPDATE users 
+	SET 
+		created_at=DATE_FORMAT(str_to_date(created_at, '%d.%m.%Y %H:%i'),'%Y-%m-%d %H:%i'),
+		updated_at=DATE_FORMAT(str_to_date(updated_at, '%d.%m.%Y %H:%i'),'%Y-%m-%d %H:%i');
+
+ALTER TABLE users 
+	MODIFY 
+		created_at DATETIME;
+ALTER TABLE users 
+	MODIFY updated_at DATETIME;
+
 SELECT * FROM geekbrains.users;
 describe geekbrains.users;
