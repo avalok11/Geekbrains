@@ -17,8 +17,12 @@
 /*
 Приложение – кассовая система. 
 Задачи выполняемые приожение - поддержка операционной деятельности ресторана.
-Функции -
-Ограничения расчет с гостями, ведение справочников товаров.
+Функции:
+ ведение меню
+ прием заказа и оформление стола
+ автоматизированный расчет стомиости заказа, перед оплатой
+ управление логированием опасных операций
+Ограничения не рассматривается управление кухней.
 */
 
 /*
@@ -245,6 +249,22 @@ insert into `order` values
     (null, 3, NOW(), 3, 1, 3),
     (null, 3, NOW(), 3, 1, 3),
     (null, 3, NOW(), 3, 1, 2);
+
+-- таблица заказ - стол
+drop table if exists ordertable;
+create table ordertable(
+	id serial primary key,
+	order_id bigint unsigned comment 'ссылка на номер заказа',
+	table_id bigint unsigned comment 'ссылка на номер стола',
+    constraint fk_orders_id foreign key (order_id) references `order` (id) on delete cascade on update cascade,
+    constraint fk_tables_id foreign key (table_id) references `table` (id) on delete cascade on update cascade
+) comment 'соотвествие заказа и номера стола';
+-- наполнение
+insert into ordertable values
+	(NULL, 1, 1),
+    (NULL, 2, 2),
+    (NULL, 3, 2);
+
 
 -- таблица расчетов (оплата по товарам)
 drop table if exists payments;
