@@ -1,0 +1,12 @@
+# 2.	Изучить список открытых API. Найти среди них любое, требующее авторизацию (любого типа).
+# Выполнить запросы к нему, пройдя авторизацию. Ответ сервера записать в файл.
+
+import requests
+
+url = 'https://api.vk.com/method/friends.get'
+token = '30320cae30320cae30320cae75305e26c13303230320cae6d7e406dd13fd49332ba7b09'
+user_id = input("Enter the VK id number:")
+params = {'user_id': user_id, 'v': 5.95, 'access_token': token}
+
+response = requests.get(url, params=params)
+print(response.text)
