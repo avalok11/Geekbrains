@@ -3,17 +3,21 @@
 
 import json
 import requests
-#from pprint import pprint
+from pprint import pprint
 
 username = input("Enter the github username:")
 response = requests.get('https://api.github.com/users/'+username+'/repos')
 
-if response:
-    data = response.json()
-    print(response.status_code)
+if response.ok:
+    data = json.loads(response.text)
 
-    with open('list_of_reps.json', 'w') as outfile:
-        json.dump(data, outfile)
+    for row in data:
+        repos = row['name']
+
+        pprint(repos)
+
+    with open('list_of_reps.json', 'w', encoding='utf-8') as outfile:
+        json.dump(data, outfile, ensure_ascii=False, indent=4)
 
 
 
