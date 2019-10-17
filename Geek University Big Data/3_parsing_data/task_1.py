@@ -6,7 +6,12 @@ import requests
 from pprint import pprint
 
 username = input("Enter the github username:")
-response = requests.get('https://api.github.com/users/'+username+'/repos')
+
+url = 'https://api.github.com/users/'
+get = '/repos'
+#response = requests.get('https://api.github.com/users/'+username+'/repos')
+response = requests.get(f'{url}{username}{get}')
+
 
 if response.ok:
     data = json.loads(response.text)
