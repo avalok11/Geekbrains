@@ -1,6 +1,9 @@
 # 1) Написать программу, которая собирает входящие письма из своего или тестового почтового ящика и сложить данные о
 # письмах в базу данных (от кого, дата отправки, тема письма, текст письма полный)
 
+# реализовал только mail ru и чтение одной страницы со списком сообщений
+# очень крутой прктический курс!
+# спасибо!
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -22,7 +25,7 @@ driver = webdriver.Chrome()
 driver.get('https://mail.ru')
 
 elem = driver.find_element_by_id('mailbox:login')
-elem.send_keys('greeka')
+elem.send_keys('')
 
 domain = driver.find_element_by_id('mailbox:domain')
 select = Select(driver.find_element_by_id('mailbox:domain'))
@@ -37,7 +40,7 @@ button.click()
 #elem.send_keys(Keys.RETURN)
 
 elem = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'mailbox:password')))
-elem.send_keys('Djljrfyfkvjq10')
+elem.send_keys('')
 elem.send_keys(Keys.RETURN)
 
 while True:
